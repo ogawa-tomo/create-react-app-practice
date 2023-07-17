@@ -4,17 +4,28 @@ import "./MemoEditForm.css";
 
 type Props = {
   memo: Memo;
-  updateMemo: (memo: Memo, newText: string) => void;
-  deleteMemo: (memo: Memo) => void;
+  setEditingMemo: (memo: Memo | undefined) => void;
+  updateMemoData: (memo: Memo, newText: string) => void;
+  deleteMemoData: (memo: Memo) => void;
 };
 
 export const MemoEditForm: FC<Props> = (props) => {
-  const { memo, updateMemo, deleteMemo } = props;
+  const { memo, setEditingMemo, updateMemoData, deleteMemoData } = props;
   const [newText, setNewText] = useState<string>(memo.text);
 
   useEffect(() => {
     setNewText(memo.text);
   }, [memo]);
+
+  const onClickUpdate = () => {
+    updateMemoData(memo, newText);
+    setEditingMemo(undefined);
+  };
+
+  const onClickDelete = () => {
+    deleteMemoData(memo);
+    setEditingMemo(undefined);
+  };
 
   return (
     <>
@@ -25,10 +36,10 @@ export const MemoEditForm: FC<Props> = (props) => {
         }
         className="text-area"
       ></textarea>
-      <button onClick={() => updateMemo(memo, newText)} className="update">
+      <button onClick={onClickUpdate} className="update">
         更新
       </button>
-      <button onClick={() => deleteMemo(memo)} className="delete">
+      <button onClick={onClickDelete} className="delete">
         削除
       </button>
     </>
