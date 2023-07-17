@@ -9,6 +9,25 @@ const App: FC = () => {
   const { memos, addMemoData, updateMemoData, deleteMemoData } = useMemoData();
   const [editingMemo, setEditingMemo] = useState<Memo | undefined>();
 
+  const addMemo = () => {
+    const addedMemo = addMemoData("新規メモ");
+    setEditingMemo(addedMemo);
+  };
+
+  const selectMemo = (memo: Memo) => {
+    setEditingMemo(memo);
+  }
+
+  const updateMemo = (memo: Memo, newText: string) => {
+    updateMemoData(memo, newText);
+    setEditingMemo(undefined);
+  };
+
+  const deleteMemo = (memo: Memo) => {
+    deleteMemoData(memo);
+    setEditingMemo(undefined);
+  };
+
   return (
     <>
       <h1>メモアプリ</h1>
@@ -17,17 +36,16 @@ const App: FC = () => {
           <MemoList
             memos={memos}
             editingMemo={editingMemo}
-            setEditingMemo={setEditingMemo}
-            addMemoData={addMemoData}
+            selectMemo={selectMemo}
+            addMemo={addMemo}
           />
         </div>
         <div className="form">
           {editingMemo && (
             <MemoEditForm
               memo={editingMemo}
-              setEditingMemo={setEditingMemo}
-              updateMemoData={updateMemoData}
-              deleteMemoData={deleteMemoData}
+              updateMemo={updateMemo}
+              deleteMemo={deleteMemo}
             />
           )}
         </div>
