@@ -22,9 +22,9 @@ export const useMemoData = () => {
       memos.length === 0
         ? 1
         : Math.max(...memos.map((memo: Memo) => memo.id)) + 1;
-    const newMemo = { id: newId, text: text }
+    const newMemo = { id: newId, text: text };
     setMemos([...memos, newMemo]);
-    return newMemo
+    return newMemo;
   };
 
   const updateMemoData = (memo: Memo, newText: string) => {

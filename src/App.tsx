@@ -16,7 +16,7 @@ const App: FC = () => {
 
   const selectMemo = (memo: Memo) => {
     setEditingMemo(memo);
-  }
+  };
 
   const updateMemo = (memo: Memo, newText: string) => {
     updateMemoData(memo, newText);
