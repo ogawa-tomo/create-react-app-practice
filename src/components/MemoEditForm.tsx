@@ -1,4 +1,5 @@
-import React, { useState, useEffect, FC, ChangeEvent } from "react";
+import React, { useState, useEffect, FC, ChangeEvent, useContext } from "react";
+import { LogginFlagContext } from "./providers/LogginFlagProvider";
 import { Memo } from "../types/memo";
 import "./MemoEditForm.css";
 
@@ -11,26 +12,35 @@ type Props = {
 export const MemoEditForm: FC<Props> = (props) => {
   const { memo, updateMemo, deleteMemo } = props;
   const [newText, setNewText] = useState<string>(memo.text);
+  const { isLoggedIn } = useContext(LogginFlagContext);
 
   useEffect(() => {
     setNewText(memo.text);
   }, [memo]);
 
+  const onTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    if (isLoggedIn) {
+      setNewText(e.target.value)
+    }
+  }
+
   return (
     <>
       <textarea
         value={newText}
-        onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
-          setNewText(e.target.value)
-        }
+        onChange={onTextChange}
         className="text-area"
       ></textarea>
-      <button onClick={() => updateMemo(memo, newText)} className="update">
-        更新
-      </button>
-      <button onClick={() => deleteMemo(memo)} className="delete">
-        削除
-      </button>
+      {isLoggedIn && (
+        <div>
+          <button onClick={() => updateMemo(memo, newText)} className="update">
+            更新
+          </button>
+          <button onClick={() => deleteMemo(memo)} className="delete">
+            削除
+          </button>
+        </div>
+      )}
     </>
   );
 };
