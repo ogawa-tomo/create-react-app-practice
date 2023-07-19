@@ -10,15 +10,12 @@ type Props = {
   children: ReactNode;
 };
 
-type LoggedIn = {
+type LogginDataType = {
   isLoggedIn: boolean;
   setIsLoggedIn: (loggedIn: boolean) => void;
 };
 
-const LogginFlagContext = createContext<LoggedIn>({
-  isLoggedIn: false,
-  setIsLoggedIn: () => {},
-});
+const LogginFlagContext = createContext<LogginDataType>({} as LogginDataType);
 
 export const LogginFlagProvider: FC<Props> = (props) => {
   const { children } = props;
