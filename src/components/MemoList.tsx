@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Memo } from "../types/memo";
+import { useLogginFlag } from "./providers/LogginFlagProvider";
 import "./MemoList.css";
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
 
 export const MemoList: FC<Props> = (props) => {
   const { memos, editingMemo, selectMemo, addMemo } = props;
+  const { isLoggedIn } = useLogginFlag();
 
   const editingMemoClass = (memo: Memo): string | undefined => {
     if (editingMemo && memo.id === editingMemo.id) return "editing-memo";
@@ -28,9 +30,11 @@ export const MemoList: FC<Props> = (props) => {
             {memo.text.split("\n")[0]}
           </li>
         ))}
-        <li onClick={addMemo} style={{ cursor: "pointer" }}>
-          +
-        </li>
+        {isLoggedIn && (
+          <li onClick={addMemo} style={{ cursor: "pointer" }}>
+            +
+          </li>
+        )}
       </ul>
     </>
   );
