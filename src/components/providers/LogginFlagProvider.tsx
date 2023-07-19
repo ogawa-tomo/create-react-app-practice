@@ -1,4 +1,4 @@
-import React, { createContext, FC, ReactNode, useState } from "react";
+import React, { createContext, FC, ReactNode, useContext, useState } from "react";
 
 type Props = {
   children: ReactNode;
@@ -9,7 +9,7 @@ type LoggedIn = {
   setIsLoggedIn: (loggedIn: boolean) => void;
 };
 
-export const LogginFlagContext = createContext<LoggedIn>({
+const LogginFlagContext = createContext<LoggedIn>({
   isLoggedIn: false,
   setIsLoggedIn: () => {},
 });
@@ -25,3 +25,5 @@ export const LogginFlagProvider: FC<Props> = (props) => {
     </LogginFlagContext.Provider>
   );
 };
+
+export const useLogginFlag = () => useContext(LogginFlagContext);

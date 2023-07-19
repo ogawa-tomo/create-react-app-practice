@@ -1,9 +1,9 @@
-import React, { FC, useContext } from "react";
-import { LogginFlagContext } from "./providers/LogginFlagProvider";
+import React, { FC } from "react";
+import { useLogginFlag } from "./providers/LogginFlagProvider";
 import "./LogginButton.css";
 
 export const LogginButton: FC = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(LogginFlagContext);
+  const { isLoggedIn, setIsLoggedIn } = useLogginFlag();
 
   return (
     <div className="button">

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, FC, ChangeEvent, useContext } from "react";
-import { LogginFlagContext } from "./providers/LogginFlagProvider";
+import React, { useState, useEffect, FC, ChangeEvent } from "react";
+import { useLogginFlag } from "./providers/LogginFlagProvider";
 import { Memo } from "../types/memo";
 import "./MemoEditForm.css";
 
@@ -12,7 +12,7 @@ type Props = {
 export const MemoEditForm: FC<Props> = (props) => {
   const { memo, updateMemo, deleteMemo } = props;
   const [newText, setNewText] = useState<string>(memo.text);
-  const { isLoggedIn } = useContext(LogginFlagContext);
+  const { isLoggedIn } = useLogginFlag();
 
   useEffect(() => {
     setNewText(memo.text);
