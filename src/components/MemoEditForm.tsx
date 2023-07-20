@@ -18,15 +18,13 @@ export const MemoEditForm: FC<Props> = (props) => {
     setNewText(memo.text);
   }, [memo]);
 
-  const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setNewText(e.target.value);
-  };
-
   return (
     <>
       <textarea
         value={newText}
-        onChange={onChangeText}
+        onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+          setNewText(e.target.value)
+        }
         className="text-area"
         readOnly={!isLoggedIn}
       ></textarea>
