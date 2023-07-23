@@ -3,9 +3,9 @@ import type { Memo } from "../types/memo";
 
 export const useMemoData = () => {
   const loadMemoData = (): Memo[] => {
-    const data = localStorage.getItem("memos");
-    if (data) {
-      return JSON.parse(data);
+    const memosData = localStorage.getItem("memos");
+    if (memosData) {
+      return JSON.parse(memosData);
     } else {
       return [];
     }
