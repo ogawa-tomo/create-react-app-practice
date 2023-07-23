@@ -29,7 +29,7 @@ export const useMemoData = () => {
 
   const updateMemoData = (memo: Memo, newText: string) => {
     const newMemos = [...memos];
-    newMemos[memos.indexOf(memo)] = { id: memo.id, text: newText };
+    newMemos[memos.indexOf(memo)] = { ...memo, text: newText };
     setMemos(newMemos);
   };
 
