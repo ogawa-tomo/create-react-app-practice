@@ -1,0 +1,13 @@
+.list-style {
+  list-style: none;
+}
+
+.list-element {
+  text-decoration: underline;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.editing-memo {
+  font-weight: bold;
+}
