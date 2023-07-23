@@ -3,9 +3,9 @@ import type { Memo } from "../types/memo";
 
 export const useMemoData = () => {
   const loadMemoData = (): Memo[] => {
-    const data = localStorage.getItem("memos");
-    if (data) {
-      return JSON.parse(data);
+    const memosData = localStorage.getItem("memos");
+    if (memosData) {
+      return JSON.parse(memosData);
     } else {
       return [];
     }
@@ -29,7 +29,7 @@ export const useMemoData = () => {
 
   const updateMemoData = (memo: Memo, newText: string) => {
     const newMemos = [...memos];
-    newMemos[memos.indexOf(memo)] = { id: memo.id, text: newText };
+    newMemos[memos.indexOf(memo)] = { ...memo, text: newText };
     setMemos(newMemos);
   };
 
