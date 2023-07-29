@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { useLogginFlag } from "./providers/LogginFlagProvider";
-import "./LogginButton.css";
+import { useLoginState } from "./providers/LoginStateProvider";
+import "./LoginButton.css";
 
-export const LogginButton: FC = () => {
-  const { isLoggedIn, setIsLoggedIn } = useLogginFlag();
+export const LoginButton: FC = () => {
+  const { isLoggedIn, setIsLoggedIn } = useLoginState();
 
   return (
     <div className="button">

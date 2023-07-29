@@ -10,23 +10,23 @@ type Props = {
   children: ReactNode;
 };
 
-type LogginDataType = {
+type LoginDataType = {
   isLoggedIn: boolean;
   setIsLoggedIn: (loggedIn: boolean) => void;
 };
 
-const LogginFlagContext = createContext<LogginDataType>({} as LogginDataType);
+const LoginStateContext = createContext<LoginDataType>({} as LoginDataType);
 
-export const LogginFlagProvider: FC<Props> = (props) => {
+export const LoginStateProvider: FC<Props> = (props) => {
   const { children } = props;
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   return (
-    <LogginFlagContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <LoginStateContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       {children}
-    </LogginFlagContext.Provider>
+    </LoginStateContext.Provider>
   );
 };
 
-export const useLogginFlag = () => useContext(LogginFlagContext);
+export const useLoginState = () => useContext(LoginStateContext);

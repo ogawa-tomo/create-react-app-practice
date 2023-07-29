@@ -3,7 +3,7 @@ import type { Memo } from "./types/memo";
 import { useMemoData } from "./hooks/useMemoData";
 import { MemoEditForm } from "./components/MemoEditForm";
 import { MemoList } from "./components/MemoList";
-import { LogginButton } from "./components/LogginButton";
+import { LoginButton } from "./components/LoginButton";
 import "./App.css";
 
 const App: FC = () => {
@@ -32,7 +32,7 @@ const App: FC = () => {
   return (
     <>
       <h1>メモアプリ</h1>
-      <LogginButton />
+      <LoginButton />
       <main>
         <div className="list">
           <MemoList
