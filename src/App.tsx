@@ -1,48 +1,30 @@
-import React, { useEffect } from "react";
-import { useState, FC } from "react";
+import React, { FC, useState } from "react";
 import type { Memo } from "./types/memo";
+import { useMemoData } from "./hooks/useMemoData";
 import { MemoEditForm } from "./components/MemoEditForm";
 import { MemoList } from "./components/MemoList";
 import "./App.css";
 
 const App: FC = () => {
-  const loadMemo = (): Memo[] => {
-    const memosData = localStorage.getItem("memos");
-    if (memosData) {
-      return JSON.parse(memosData);
-    } else {
-      return [];
-    }
-  };
-
-  const [memos, setMemos] = useState<Memo[]>(loadMemo());
+  const { memos, addMemoData, updateMemoData, deleteMemoData } = useMemoData();
   const [editingMemo, setEditingMemo] = useState<Memo | undefined>();
 
-  useEffect(() => {
-    localStorage.setItem("memos", JSON.stringify(memos));
-  }, [memos]);
-
   const addMemo = () => {
-    const newId =
-      memos.length === 0
-        ? 1
-        : Math.max(...memos.map((memo: Memo) => memo.id)) + 1;
-    const newMemo = { id: newId, text: "新規メモ" };
-    setMemos([...memos, newMemo]);
-    setEditingMemo(newMemo);
+    const addedMemo = addMemoData("新規メモ");
+    setEditingMemo(addedMemo);
+  };
+
+  const selectMemo = (memo: Memo) => {
+    setEditingMemo(memo);
   };
 
   const updateMemo = (memo: Memo, newText: string) => {
-    const newMemos = [...memos];
-    newMemos[memos.indexOf(memo)] = { ...memo, text: newText };
-    setMemos(newMemos);
+    updateMemoData(memo, newText);
     setEditingMemo(undefined);
   };
 
   const deleteMemo = (memo: Memo) => {
-    const newMemos = [...memos];
-    newMemos.splice(memos.indexOf(memo), 1);
-    setMemos(newMemos);
+    deleteMemoData(memo);
     setEditingMemo(undefined);
   };
 
@@ -54,7 +36,7 @@ const App: FC = () => {
           <MemoList
             memos={memos}
             editingMemo={editingMemo}
-            setEditingMemo={setEditingMemo}
+            selectMemo={selectMemo}
             addMemo={addMemo}
           />
         </div>
