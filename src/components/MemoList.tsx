@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Memo } from "../types/memo";
-import { useLoginState } from "./providers/LoginStateProvider";
+import { useLogin } from "./providers/LoginProvider";
 import "./MemoList.css";
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 
 export const MemoList: FC<Props> = (props) => {
   const { memos, editingMemo, selectMemo, addMemo } = props;
-  const { isLoggedIn } = useLoginState();
+  const { isLoggedIn } = useLogin();
 
   const editingMemoClass = (memo: Memo): string | undefined => {
     if (editingMemo && memo.id === editingMemo.id) return "editing-memo";

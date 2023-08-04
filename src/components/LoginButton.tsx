@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { useLoginState } from "./providers/LoginStateProvider";
+import { useLogin } from "./providers/LoginProvider";
 import "./LoginButton.css";
 
 export const LoginButton: FC = () => {
-  const { isLoggedIn, setIsLoggedIn } = useLoginState();
+  const { isLoggedIn, setIsLoggedIn } = useLogin();
 
   return (
     <div className="button">

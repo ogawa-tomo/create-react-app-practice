@@ -15,18 +15,18 @@ type LoginDataType = {
   setIsLoggedIn: (loggedIn: boolean) => void;
 };
 
-const LoginStateContext = createContext<LoginDataType>({} as LoginDataType);
+const LoginContext = createContext<LoginDataType>({} as LoginDataType);
 
-export const LoginStateProvider: FC<Props> = (props) => {
+export const LoginProvider: FC<Props> = (props) => {
   const { children } = props;
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   return (
-    <LoginStateContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       {children}
-    </LoginStateContext.Provider>
+    </LoginContext.Provider>
   );
 };
 
-export const useLoginState = () => useContext(LoginStateContext);
+export const useLogin = () => useContext(LoginContext);

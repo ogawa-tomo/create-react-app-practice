@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FC, ChangeEvent } from "react";
-import { useLoginState } from "./providers/LoginStateProvider";
+import { useLogin } from "./providers/LoginProvider";
 import { Memo } from "../types/memo";
 import "./MemoEditForm.css";
 
@@ -12,7 +12,7 @@ type Props = {
 export const MemoEditForm: FC<Props> = (props) => {
   const { memo, updateMemo, deleteMemo } = props;
   const [newText, setNewText] = useState<string>(memo.text);
-  const { isLoggedIn } = useLoginState();
+  const { isLoggedIn } = useLogin();
 
   useEffect(() => {
     setNewText(memo.text);
