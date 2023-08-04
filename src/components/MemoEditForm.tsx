@@ -1,4 +1,5 @@
 import React, { useState, useEffect, FC, ChangeEvent } from "react";
+import { useLogin } from "./providers/LoginProvider";
 import { Memo } from "../types/memo";
 import "./MemoEditForm.css";
 
@@ -11,6 +12,7 @@ type Props = {
 export const MemoEditForm: FC<Props> = (props) => {
   const { memo, updateMemo, deleteMemo } = props;
   const [newText, setNewText] = useState<string>(memo.text);
+  const { isLoggedIn } = useLogin();
 
   useEffect(() => {
     setNewText(memo.text);
@@ -24,13 +26,18 @@ export const MemoEditForm: FC<Props> = (props) => {
           setNewText(e.target.value)
         }
         className="text-area"
+        readOnly={!isLoggedIn}
       ></textarea>
-      <button onClick={() => updateMemo(memo, newText)} className="update">
-        更新
-      </button>
-      <button onClick={() => deleteMemo(memo)} className="delete">
-        削除
-      </button>
+      {isLoggedIn && (
+        <div>
+          <button onClick={() => updateMemo(memo, newText)} className="update">
+            更新
+          </button>
+          <button onClick={() => deleteMemo(memo)} className="delete">
+            削除
+          </button>
+        </div>
+      )}
     </>
   );
 };
